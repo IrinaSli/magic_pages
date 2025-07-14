@@ -37,8 +37,7 @@ class CreateAccount(BasePage):
         assert email_error.is_displayed()
 
 
-    def check_password_format_error_is_displayed(self):
-        psw_requirements_text = 'Minimum length of this field must be equal or greater than 8 symbols. Leading and trailing spaces will be ignored.'
+    def check_password_format_error_is_displayed(self, psw_requirements_text):
         psw_error_text = self.find(psw_error_loc).text
         assert psw_requirements_text == psw_error_text
 

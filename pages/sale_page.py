@@ -27,4 +27,5 @@ class SalePage(BasePage):
 
     def check_women_sale_page_url(self):
         self.driver.implicitly_wait(10)
-        self.page_url.__contains__("women-sale.html")
+        page_url = self.driver.current_url
+        assert "/women-sale.html" in page_url

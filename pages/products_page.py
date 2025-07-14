@@ -23,7 +23,7 @@ class ProductPage(BasePage):
          until(EC.visibility_of_element_located((By.XPATH, '//div[@aria-labelledby="block-compare-heading"]'))))
         product_link = self.find(product_link_loc)
         item_in_compare_name = product_link.text.strip()
-        return selected_item_name, item_in_compare_name
+        assert item_in_compare_name == selected_item_name
 
 
     def remove_all_from_compare(self):
@@ -35,12 +35,13 @@ class ProductPage(BasePage):
         modal_ok_button.click()
 
 
-    def get_alert_text(self):
+    def check_alert_text(self, expected_message):
         alert = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(
                 (By.XPATH, "//div[@role='alert']//div[contains(text(), 'cleared the comparison')]"))
         )
-        return alert.text.strip()
+        alert_text = alert.text.strip()
+        assert alert_text == expected_message
 
 
     def hover_over_product(self):
@@ -49,8 +50,19 @@ class ProductPage(BasePage):
         ActionChains(self.driver).move_to_element(selected_item).perform()
 
 
-    def check_product_actions_is_displayed(self):
+    def check_add_to_card_actions_is_displayed(self):
         self.hover_over_product()
-        self.add_to_cart_btn = self.driver.find_element(By.XPATH, '//button[@type="submit"]')
-        self.add_to_wishlist = self.driver.find_element(By.XPATH, '//a[@class="action towishlist"]')
-        self.add_to_compare = self.driver.find_element(By.XPATH, '//a[@class="action tocompare"]')
+        add_to_cart_btn = self.driver.find_element(By.XPATH, '//button[@type="submit"]')
+        assert add_to_cart_btn.is_displayed()
+
+
+    def check_add_to_wishlist_actions_is_displayed(self):
+        self.hover_over_product()
+        add_to_wishlist = self.driver.find_element(By.XPATH, '//a[@class="action towishlist"]')
+        assert add_to_wishlist.is_displayed()
+
+
+    def check_add_to_compare_actions_is_displayed(self):
+        self.hover_over_product()
+        add_to_compare = self.driver.find_element(By.XPATH, '//a[@class="action tocompare"]')
+        assert add_to_compare.is_displayed()
