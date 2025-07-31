@@ -1,6 +1,6 @@
 from selenium import webdriver
 import pytest
-
+from selenium.webdriver.chrome.options import Options
 from pages.create_account_page import CreateAccount
 from pages.products_page import ProductPage
 from pages.sale_page import SalePage
@@ -8,7 +8,9 @@ from pages.sale_page import SalePage
 
 @pytest.fixture()
 def driver():
-    chrome_driver = webdriver.Chrome()
+    options = Options()
+    options.add_argument('--headless')
+    chrome_driver = webdriver.Chrome(options=options)
     return chrome_driver
 
 
