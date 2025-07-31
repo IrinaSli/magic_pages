@@ -16,9 +16,9 @@ class BasePage:
             self.driver.get(f'{self.base_url}{self.page_url}')
         else:
             raise NotImplementedError('Page cannot be opened for this page class')
-        WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located((By.XPATH, '//button[@aria-label="Consent"]'))
-        ).click()
+        # WebDriverWait(self.driver, 10).until(
+        #     EC.visibility_of_element_located((By.XPATH, '//button[@aria-label="Consent"]'))
+        # ).click()
 
 
     def find(self, locator: tuple):
