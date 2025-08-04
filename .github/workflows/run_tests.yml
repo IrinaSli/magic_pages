@@ -45,7 +45,10 @@ jobs:
           distribution: 'microsoft'
           java-version: '21'
       - name: Install Allure
-        run: sudo wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.tgz && sudo tar -zxvf allure-2.29.0.tgz -C /opt/ && sudo ln -s /opt/allure-2.13.8/bin/allure /usr/bin/allure
+        run: |
+          wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.tgz
+          tar -zxvf allure-2.29.0.tgz
+          echo "$GITHUB_WORKSPACE/allure-2.29.0/bin" >> $GITHUB_PATH
       - name: Generate report
         run: allure generate -c allure-results -o allure-report
       - name: Save allure report
