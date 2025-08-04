@@ -7,7 +7,7 @@ on:
         description: choose tests set
         required: true
         type: choice
-        default: smoke
+        default: all
         options:
           - smoke
           - regression
@@ -32,10 +32,10 @@ jobs:
         run: pytest
       - name: run smoke tests
         if: "github.event.inputs.deployment_target == 'smoke'"
-        run: pytest
+        run: pytest -m smoke
       - name: run regression tests
         if: "github.event.inputs.deployment_target == 'regression'"
-        run: pytest
+        run: pytest -m regression
       - name: run extended tests
         if: "github.event.inputs.deployment_target == 'extended'"
-        run: pytest
+        run: pytest -m extended
