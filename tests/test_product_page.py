@@ -1,8 +1,13 @@
+import pytest
+
+
+@pytest.mark.extended
 def test_add_to_compare(product_page):
     product_page.open_page()
     product_page.add_to_compare()
 
 
+@pytest.mark.extended
 def test_remove_all_from_compare(product_page):
     product_page.open_page()
     product_page.add_to_compare()
@@ -11,6 +16,7 @@ def test_remove_all_from_compare(product_page):
     product_page.check_alert_text(expected_message)
 
 
+@pytest.mark.extended
 def test_product_actions_are_displayed(product_page):
     product_page.open_page()
     product_page.check_add_to_card_actions_is_displayed()

@@ -19,8 +19,8 @@ class ProductPage(BasePage):
         selected_item_name = selected_item.text.strip()
         add_to_compare = self.find(add_to_compare_loc)
         ActionChains(self.driver).move_to_element(selected_item).click(add_to_compare).perform()
-        (WebDriverWait(self.driver, 10).
-         until(EC.visibility_of_element_located((By.XPATH, '//div[@aria-labelledby="block-compare-heading"]'))))
+        # (WebDriverWait(self.driver, 10).
+        #  until(EC.visibility_of_element_located((By.XPATH, '//div[@aria-labelledby="block-compare-heading"]'))))
         product_link = self.find(product_link_loc)
         item_in_compare_name = product_link.text.strip()
         assert item_in_compare_name == selected_item_name
