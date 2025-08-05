@@ -54,12 +54,21 @@ jobs:
           tar -zxvf allure-2.29.0.tgz
           echo "$GITHUB_WORKSPACE/allure-2.29.0/bin" >> $GITHUB_PATH
       - name: Generate report
-        run: allure generate -c allure-results -o allure-report
+        run: allure generate -c allure-results -o _site
       - name: Save allure report
         uses: actions/upload-artifact@v4
         with:
-          name: allure-report
-          path: allure-report
+          name: _site
+          path: _site
           retention-days: 1
-
+  publish-report:
+    name: Report publication
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v2
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
           
