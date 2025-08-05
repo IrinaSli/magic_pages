@@ -61,9 +61,11 @@ jobs:
           name: _site
           path: _site
           retention-days: 1
+
   publish-report:
     name: Report publication
     runs-on: ubuntu-latest
+    needs: run-tests
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v3
