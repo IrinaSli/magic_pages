@@ -9,9 +9,10 @@ from pages.sale_page import SalePage
 @pytest.fixture()
 def driver():
     options = Options()
-    options.add_argument('--headless')
-    chrome_driver = webdriver.Chrome(options=options)
-    return chrome_driver
+    options.add_argument('--headless=new')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    return webdriver.Chrome(options=options)
 
 
 @pytest.fixture()
